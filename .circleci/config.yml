@@ -1,0 +1,43 @@
+# CircleCI でテストを実行するための設定ファイル
+verison: 2 # 任意の CircleCI のバージョンを指定
+jobs: # ワークフローは 1 つ以上の任意の名前付きジョブで構成し、それらのジョブは jobs マップで指定する
+      # また、各ジョブは、キーとなるジョブ名と値となるマップで構成される
+  setup_dependencies: # 依存関係を解決するジョブ
+    docker:
+      - image: circleci/python3.8.5
+    setps: # ステップは Docker コンテナ内で実行するコマンドのリスト
+      - checkout # 設定済みの path (デフォルトは working_directory) にソースコードをチェックアウト
+      - restore_cache: # key に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元
+          key: deps-{{ checksum "requirements.lock" }}
+      - run: # run はあらゆるコマンドラインプログラムを呼び出すのに使われる
+          command: | # シェルから実行するコマンド
+            pip install --user -r requirements.lock
+      - save_cache: # 依存関係やソースコードのようなファイル、ディレクトリのキャッシュを生成し、保存
+          # key → キャッシュの一意の識別子
+          # checksum "filename" → filename　で指定したファイルの内容の SHA256 ハッシュを
+          # Base64 エンコードした値
+          key: deps-{{ checksum "requirements.lock" }}
+          # paths → キャッシュに追加するディレクトリのリスト
+          paths:
+            - "~/.local"
+  test: # テストを実行するジョブ
+    docker:
+      - image: circleci/python:3.8.5
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps-{{ checksum "requirements.lock" }}
+      - run:
+          command: |
+            python -m unittest -v
+workflows: # ワークフローで実行順序を定義
+  version: 2
+  all: # 上で定義したジョブ二つを直列で実行するワークフロー
+    jobs:
+      - setup_dependencies
+      - test:
+          requires: # test ジョブを開始するために成功する必要があるジョブのリスト
+            - setup_dependencies
+
+
+
