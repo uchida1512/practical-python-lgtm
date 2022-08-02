@@ -1,11 +1,11 @@
 # CircleCI でテストを実行するための設定ファイル
-verison: 2 # 任意の CircleCI のバージョンを指定
+version: 2 # 任意の CircleCI のバージョンを指定
 jobs: # ワークフローは 1 つ以上の任意の名前付きジョブで構成し、それらのジョブは jobs マップで指定する
       # また、各ジョブは、キーとなるジョブ名と値となるマップで構成される
   setup_dependencies: # 依存関係を解決するジョブ
     docker:
       - image: circleci/python3.8.5
-    setps: # ステップは Docker コンテナ内で実行するコマンドのリスト
+    steps: # ステップは Docker コンテナ内で実行するコマンドのリスト
       - checkout # 設定済みの path (デフォルトは working_directory) にソースコードをチェックアウト
       - restore_cache: # key に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元
           key: deps-{{ checksum "requirements.lock" }}
