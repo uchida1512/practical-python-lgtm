@@ -5,7 +5,7 @@ import unittest
 class LgtmTest(unittest.TestCase):
     def test_lgtm(self):
         from lgtm.core import lgtm
-        self.assertIsNone(lgtm())
+        self.assertIsNone(lgtm('.python.jpeg', 'LGTM'))
 
 
 # a@DESKTOP-M8KF2FB MINGW64 ~/PycharmProjects/pythonProject/practical-python-lgtm (main)
