@@ -16,7 +16,7 @@ def cli(keyword, message):
     click.echo('lgtm')
 
 
-def lgtm():
+def lgtm(keyword, massage):
     # ここにロジック(処理)を追加していく
     pass
 
