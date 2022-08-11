@@ -1,0 +1,19 @@
+作成したテストの実行例
+
+a@DESKTOP-M8KF2FB MINGW64 ~/PycharmProjects/pythonProject/practical-python-lgtm (main)
+$ python -m unittest -v
+test_lgtm (tests.test_core.LgtmTest) ... ok
+test_save_with_message (tests.test_drawer.SavaWithMessageTest) ... ok
+test_get_image (tests.test_image_source.GetImageTest) ... ok
+test_http (tests.test_image_source.ImageSourceTest) ... ok
+test_https (tests.test_image_source.ImageSourceTest) ... ok
+test_keyword (tests.test_image_source.ImageSourceTest) ... ok
+test_localpath (tests.test_image_source.ImageSourceTest) ... ok
+test_get_image (tests.test_image_source.KeywordImageTest) ... ok
+test_get_image (tests.test_image_source.LocalImageTest) ... ok
+test_get_image (tests.test_image_source.RemoteImageTest) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.391s
+
+OK
