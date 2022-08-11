@@ -1,0 +1,15 @@
+Pillow パッケージの ImageDraw モジュールを使うと、画像に文字列の描画ができる。
+下記はサンプルコード
+
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:57:54) [MSC v.1924 64 bit (AMD64)] on win32
+>>> from PIL import Image, ImageDraw, ImageFont
+
+>>> file_path = 'mnist.png'
+
+（ローカル環境にある任意の画像パスを指定）
+>>> image = Image.open(file_path)
+
+>>> draw = ImageDraw.Draw(image)
+>>> font = ImageFont.truetype('arial.ttf', 64)
+>>> draw.text((0, 0), 'TEST Draw', font=font, fill='#f00')
+>>> image.save('mnist_drew.png', 'png')
